@@ -31,7 +31,6 @@ namespace EasyEnglishApi.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
-
             }
             _vocabularyService.AddWord(word);
             return Ok();
@@ -52,7 +51,6 @@ namespace EasyEnglishApi.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
-
             }
             _vocabularyService.UpdateWord(id, word);
             return Ok();
