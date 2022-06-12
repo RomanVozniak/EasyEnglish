@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EasyEnglishApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
-    public class CardController : Controller
+    [Route("api/[controller]")]
+    public class CardController : ControllerBase
     {
         ICardService _cardService;
 
