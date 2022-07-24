@@ -1,0 +1,17 @@
+.card {
+  height: 370px;
+  width: 400px;
+  margin: 50px;
+
+  .body-title {
+    margin-top: 25%;
+  }
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
