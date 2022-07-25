@@ -39,7 +39,7 @@ export default function Header() {
             <a href={"/studyGames/1/2/" + cardId}>Відгадування (Англ - Укр)</a>
           </li>
           <li>
-            <a href={"/studyGames/2/" + cardId}>Письмо (Укр - Англ)</a>
+            <a href={"/studyGames/2/1/" + cardId}>Письмо (Укр - Англ)</a>
           </li>
         </ul>
       </div>
