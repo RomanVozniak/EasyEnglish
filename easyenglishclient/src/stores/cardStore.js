@@ -13,9 +13,9 @@ const initialState = {
 const actions = {
   setDisplayCreateForm:
     (value) =>
-    ({ setState }) =>
-      setState({ displayCreateForm: value }),
-
+    ({ setState }) => {
+      setState({ displayCreateForm: value });
+    },
   setDisplayUpdateForm:
     (value) =>
     ({ setState }) =>

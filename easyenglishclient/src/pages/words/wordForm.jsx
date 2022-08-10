@@ -13,9 +13,6 @@ export default function WordForm(props) {
   const [cardId, setCardId] = useState(cards.length ? cards[0].id : undefined);
   const isUpdateForm = props.isUpdateForm;
 
-  console.log("cards", cards);
-  console.log("cardId", cardId);
-
   // set default values
   const wordToEdit = props.word;
   const word = {

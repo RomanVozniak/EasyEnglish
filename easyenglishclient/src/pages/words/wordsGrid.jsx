@@ -52,6 +52,8 @@ export default function WordsGrid(props) {
     }
   };
 
+  console.log("state", state);
+
   return (
     <Container>
       <CardsDropdown

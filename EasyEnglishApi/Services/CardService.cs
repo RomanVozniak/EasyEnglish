@@ -92,7 +92,11 @@ namespace EasyEnglishApi.Services
 
                 foreach(var card in cards)
                 {
-                    card.WordsCount = grouppedCards.First(c => c.CardId == card.Id).WordsCount;
+                    var cardData = grouppedCards.FirstOrDefault(c => c.CardId == card.Id);
+                    if (cardData != null)
+                    {
+                        card.WordsCount = cardData.WordsCount;
+                    }
                 }
             }
         }
