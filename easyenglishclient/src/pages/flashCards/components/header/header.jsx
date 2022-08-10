@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Button, Row, Col, Container } from "react-bootstrap";
+import React, { useEffect } from "react";
 
 import { useWordsStudyStore } from "./../../../../stores/wordsStudyStore";
 import CardsDropdown from "./../../../../components/cardsDropdown/cardsDropdown";
@@ -9,10 +8,13 @@ import "./style.scss";
 
 export default function Header() {
   const [state, actions] = useWordsStudyStore();
-  const { cards, card, cardStatistic, cardId } = state;
+  const { cards, cardStatistic, cardId } = state;
 
   useEffect(() => {
-    actions.loadCards();
+    actions.loadCardsAndSetCardId();
+  }, []);
+
+  useEffect(() => {
     actions.loadCardFull(cardId);
   }, [cardId]);
 

@@ -21,6 +21,16 @@ const actions = {
         setState({ cards: cards });
       });
     },
+  loadCardsAndSetCardId:
+    () =>
+    ({ setState }) => {
+      loadCards((cards) => {
+        const lastCard = cards[0];
+
+        setState({ cards: cards });
+        setState({ cardId: lastCard.id });
+      });
+    },
   setCardId:
     (cardId) =>
     ({ setState }) => {

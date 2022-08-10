@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Button, Row } from "react-bootstrap";
+import { say } from "./../../../../functions/functions";
 
 import CardWrapper from "../../../../components/cardWrapper/cardWrapper";
 
 const translationTypes = {
   ukToEng: 1,
   engToUk: 2,
+};
+
+const EngTitle = (props) => {
+  const text = props.text;
+  useEffect(() => say(text), []);
+  return <span onClick={() => say(text)}>{text}</span>;
 };
 
 export default function GuessCard(props) {
@@ -19,8 +26,18 @@ export default function GuessCard(props) {
     title = checkState ? word.phrase : word.translation;
     text = !checkState ? "" : word.translation;
   } else {
-    title = checkState ? word.translation : word.phrase;
-    text = !checkState ? "" : word.phrase;
+    if (checkState) {
+      title = word.translation;
+      text = (
+        <>
+          <p>{word.phrase}</p>
+          <i>{word.description}</i>
+        </>
+      );
+    } else {
+      title = <EngTitle text={word.phrase} />;
+      text = "";
+    }
   }
 
   const ButtonsFooter = (props) => {

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Button, Row, Form } from "react-bootstrap";
 
 import CardWrapper from "../../../../components/cardWrapper/cardWrapper";
@@ -31,21 +30,47 @@ export default function WriteCard(props) {
 
   const InputComponent = (props) => {
     const [value, setValue] = useState(props.value);
+
+    const buttonCheckRef = useRef(null);
+    const inputField = useRef(null);
+    useEffect(() => {
+      // current property is refered to input element
+      if (checkState === checkStateValues.input) {
+        inputField.current.focus();
+      }
+      if (checkState === checkStateValues.overview) {
+        buttonCheckRef.current.focus();
+      }
+    }, []);
+
+    const onEnterClick = (event) => {
+      if (event.key === "Enter") {
+        setInputValue(value);
+        setCheckState(checkState + 1);
+      }
+    };
+
     return (
       <>
         <Form.Group>
           <Form.Control
+            ref={inputField}
             value={value}
             onChange={(e) => setValue(e.target.value)}
+            onKeyDown={(e) => onEnterClick(e)}
+            placeholder="нажміть Enter після вводу"
           />
-          <Button
-            onClick={() => {
-              setInputValue(value);
-              setCheckState(checkState + 1);
-            }}
-          >
-            Check
-          </Button>
+          {checkState === checkStateValues.overview && (
+            <Button
+              ref={buttonCheckRef}
+              onClick={() => {
+                setInputValue(value);
+                setCheckState(checkStateValues.next);
+              }}
+            >
+              Next
+            </Button>
+          )}
         </Form.Group>
       </>
     );

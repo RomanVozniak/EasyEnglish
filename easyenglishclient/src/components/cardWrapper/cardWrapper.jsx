@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Card, Row, Col, ProgressBar } from "react-bootstrap";
-import { say } from "./../../functions/functions";
 import "./style.scss";
 
 export default function CardWrapper(props) {
@@ -19,7 +18,7 @@ export default function CardWrapper(props) {
               </Card.Header>
             )}
             <Card.Body>
-              <Card.Title className="body-title" onClick={() => say(title)}>
+              <Card.Title className="body-title">
                 <h2>{title}</h2>
               </Card.Title>
               <Card.Text>{text}</Card.Text>
