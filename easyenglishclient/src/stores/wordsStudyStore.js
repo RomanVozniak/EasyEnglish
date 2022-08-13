@@ -10,6 +10,7 @@ const initialState = {
   cards: [],
   wordsStudyResult: [],
   isGameFinished: false,
+  studyGameType: null,
 };
 
 // All the actions that mutate the store
@@ -70,6 +71,11 @@ const actions = {
     ({ getState }) => {
       const wordsStudyResult = getState().wordsStudyResult;
       wordsApi.saveLearnStatistic(wordsStudyResult);
+    },
+  setStudyGameType:
+    (gameType) =>
+    ({ setState }) => {
+      setState({ studyGameType: gameType });
     },
 };
 

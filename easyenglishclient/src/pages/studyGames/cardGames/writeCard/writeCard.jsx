@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Row, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import CardWrapper from "../../../../components/cardWrapper/cardWrapper";
 import { say } from "./../../../../functions/functions";
 
 function compare(inputValue, value) {
-  return inputValue.toLowerCase().trim() == value.toLowerCase().trim();
+  return inputValue.toLowerCase().trim() === value.toLowerCase().trim();
 }
 
 const checkStateValues = {
@@ -77,7 +77,7 @@ export default function WriteCard(props) {
   };
 
   const title = word.translation;
-  const text = checkState == checkStateValues.input ? "" : word.phrase;
+  const text = checkState === checkStateValues.input ? "" : word.phrase;
 
   return (
     <CardWrapper

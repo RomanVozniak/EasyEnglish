@@ -34,14 +34,14 @@ export default function Header() {
       <div className="area shadow-sm">
         <b>Режими навчання: </b>
         <ul className="text-primary">
-          <li>
-            <a href={"/studyGames/1/1/" + cardId}>Відгадування (Укр - Англ)</a>
+          <li onClick={() => actions.setStudyGameType(1)}>
+            Відгадування (Укр - Англ)
           </li>
-          <li>
-            <a href={"/studyGames/1/2/" + cardId}>Відгадування (Англ - Укр)</a>
+          <li onClick={() => actions.setStudyGameType(2)}>
+            Відгадування (Англ - Укр)
           </li>
-          <li>
-            <a href={"/studyGames/2/1/" + cardId}>Письмо (Укр - Англ)</a>
+          <li onClick={() => actions.setStudyGameType(3)}>
+            Письмо (Укр - Англ)
           </li>
         </ul>
       </div>

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Form, Container } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 import { useWordsStudyStore } from "./../../stores/wordsStudyStore";
-import CardsDropdown from "./../../components/cardsDropdown/cardsDropdown";
 import Header from "./components/header/header";
+import Body from "./components/body/body";
 
 export default function FlashCards() {
   const [state, actions] = useWordsStudyStore();
-  const { cards, cardId } = state;
 
   useEffect(() => {
     actions.loadCards();
@@ -17,7 +16,14 @@ export default function FlashCards() {
     <>
       <Container>
         <h2>Flash cards</h2>
-        <Header />
+        <Row>
+          <Col md="4">
+            <Header />
+          </Col>
+          <Col>
+            <Body />
+          </Col>
+        </Row>
       </Container>
     </>
   );

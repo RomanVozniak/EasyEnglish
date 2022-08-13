@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Card, Container, Button, Row, Col } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
 
 import { useWordsStudyStore } from "../../../stores/wordsStudyStore";
 
@@ -9,10 +8,22 @@ import FinishCard from "./finishCard";
 
 export default function StudyGame() {
   const [state, actions] = useWordsStudyStore();
-  const { words, isGameFinished, wordsStudyResult } = {
+  const { words, isGameFinished, wordsStudyResult, cardId, studyGameType } = {
     ...state,
   };
-  const { cardId, studyType, translationType } = useParams();
+
+  let translationType;
+  let type;
+  if (studyGameType === 1) {
+    translationType = 1;
+    type = 1;
+  } else if (studyGameType === 2) {
+    translationType = 2;
+    type = 1;
+  } else if (studyGameType === 3) {
+    translationType = 1;
+    type = 2;
+  }
 
   useEffect(() => {
     actions.setCardId(cardId);
@@ -24,7 +35,7 @@ export default function StudyGame() {
       {words.length > 0 && (
         <Container>
           {!isGameFinished && (
-            <PlayCard type={studyType} translationType={translationType} />
+            <PlayCard type={type} translationType={translationType} />
           )}
           {isGameFinished && (
             <FinishCard
