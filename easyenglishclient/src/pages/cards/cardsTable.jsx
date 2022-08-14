@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Table, Button, ProgressBar, Row } from "react-bootstrap";
+import React from "react";
+import { Table, Button } from "react-bootstrap";
 
 import { useCardStore } from "./../../stores/cardStore";
 import { deleteCard } from "./../../functions/api";
@@ -39,7 +39,7 @@ export default function CardsTable(props) {
           <tr>
             <th width="3%">Id</th>
             <th width="30%">Name</th>
-            <th width="30%">Description</th>
+            <th width="30%">Created</th>
             <th width="5%">Words</th>
             <th width="15%">Status</th>
             <th width="15%">Action</th>
@@ -51,8 +51,8 @@ export default function CardsTable(props) {
             return (
               <tr key={card.id}>
                 <td>{cards.length - index}</td>
-                <td>{card.name}</td>
-                <td>{card.description}</td>
+                <td title={card.description}>{card.name}</td>
+                <td>{getDateDiff(card.createdAt)}</td>
                 <td>{card.wordsCount}</td>
                 <td>
                   {statistic && (
@@ -69,4 +69,9 @@ export default function CardsTable(props) {
       </Table>
     </>
   );
+}
+
+function getDateDiff(date) {
+  var diff = new Date(new Date() - new Date(date));
+  return `${diff.getUTCDate() - 1} days ago`;
 }
