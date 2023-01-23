@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Container, Button } from "react-bootstrap";
 import WordsTable from "./wordsTable";
 import WordForm from "./wordForm";
 import CardsDropdown from "./../../components/cardsDropdown/cardsDropdown";
@@ -15,6 +15,7 @@ export default function WordsGrid(props) {
     displayCreateForm,
     displayUpdateForm,
     wordToUpdate,
+    refreshPage,
   } = {
     ...state,
   };
@@ -26,10 +27,10 @@ export default function WordsGrid(props) {
   useEffect(() => {
     if (cardId) {
       actions.loadWords({ cardId: cardId });
-    } else {
-      actions.loadWords();
+    } else if (cardId === "") {
+      actions.loadWords(); // load all words
     }
-  }, [cardId]);
+  }, [cardId, refreshPage]);
 
   const CudComponent = () => {
     // cud - create, update, delete
@@ -51,8 +52,6 @@ export default function WordsGrid(props) {
       );
     }
   };
-
-  console.log("state", state);
 
   return (
     <Container>

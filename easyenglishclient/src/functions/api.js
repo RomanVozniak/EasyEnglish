@@ -100,6 +100,21 @@ export const wordsApi = {
       );
   },
 
+  translateWord: (phrase, langFrom, langTo, handle) => {
+    console.log("translateWord", phrase, langFrom, langTo);
+    fetch(
+      `https://api.mymemory.translated.net/get?q=${phrase}&langpair=${langFrom}|${langTo}`
+    )
+      .then((response) => response.json())
+      .then(
+        (response) => {
+          handle(response);
+          handleResponse(response);
+        },
+        (error) => handleError(error)
+      );
+  },
+
   createWord: (word) => {
     // delete fields that should be empty
     delete word.id;

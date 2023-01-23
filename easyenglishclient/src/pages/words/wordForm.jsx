@@ -13,6 +13,7 @@ export default function WordForm(props) {
   const [cardId, setCardId] = useState(cards.length ? cards[0].id : undefined);
   const isUpdateForm = props.isUpdateForm;
 
+  console.log("----translation", translation);
   // set default values
   const wordToEdit = props.word;
   const word = {
@@ -31,24 +32,36 @@ export default function WordForm(props) {
     setCardId(word.cardId);
   }, [isUpdateForm]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     word.phrase = phrase;
     word.translation = translation;
     word.description = description;
     word.cardId = cardId;
-
+    e.preventDefault();
     if (isUpdateForm) {
       wordsApi.updateWord(word);
     } else {
       wordsApi.createWord(word);
       actions.setDisplayCreateForm(true);
     }
+    actions.setRefreshPage();
   };
 
   const cancel = (e) => {
     actions.setDisplayCreateForm(false);
     actions.setDisplayUpdateForm(false);
     e.preventDefault();
+  };
+
+  const translate = () => {
+    console.log(phrase);
+    const handleResponse = (response) => {
+      const translation = response.responseData.translatedText;
+      console.log("response", response);
+      console.log("translation", translation);
+      setTranslation(translation);
+    };
+    wordsApi.translateWord(phrase, "en", "uk", handleResponse);
   };
 
   return (
@@ -70,6 +83,9 @@ export default function WordForm(props) {
                 defaultValue={phrase}
                 onChange={(e) => setPhrase(e.target.value)}
               />
+              <Button variant="dark" onClick={() => translate()}>
+                Translate
+              </Button>
             </Form.Group>
           </Col>
           <Col lg="4">
@@ -107,7 +123,7 @@ export default function WordForm(props) {
               <Form.Control
                 required
                 type="input"
-                defaultValue={translation}
+                value={translation}
                 onChange={(e) => setTranslation(e.target.value)}
               />
             </Form.Group>

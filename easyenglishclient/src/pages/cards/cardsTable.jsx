@@ -39,7 +39,8 @@ export default function CardsTable(props) {
           <tr>
             <th width="3%">Id</th>
             <th width="30%">Name</th>
-            <th width="30%">Created</th>
+            <th width="15%">Created</th>
+            <th width="15%">Last Learned</th>
             <th width="5%">Words</th>
             <th width="15%">Status</th>
             <th width="15%">Action</th>
@@ -47,16 +48,18 @@ export default function CardsTable(props) {
         </thead>
         <tbody>
           {cards.map((card, index) => {
-            const statistic = card.cardStatistic;
+            const { cardStatistic } = card;
+
             return (
               <tr key={card.id}>
                 <td>{cards.length - index}</td>
                 <td title={card.description}>{card.name}</td>
                 <td>{getDateDiff(card.createdAt)}</td>
+                <td>{getDateDiff(cardStatistic?.lastLearnDate)}</td>
                 <td>{card.wordsCount}</td>
                 <td>
-                  {statistic && (
-                    <CardStatus status={statistic} minView={true} />
+                  {cardStatistic && (
+                    <CardStatus status={cardStatistic} minView={true} />
                   )}
                 </td>
                 <td>
@@ -72,6 +75,20 @@ export default function CardsTable(props) {
 }
 
 function getDateDiff(date) {
-  var diff = new Date(new Date() - new Date(date));
-  return `${diff.getUTCDate() - 1} days ago`;
+  if (date) {
+    var diff = new Date(new Date() - new Date(date));
+    var days = diff.getUTCDate() - 1;
+    var month = diff.getUTCMonth();
+    var daysAgo = month * 30 + diff.getUTCDate() - 1;
+
+    if (daysAgo === 0) {
+      return `today`;
+    }
+    if (daysAgo === 1) {
+      return `yesterday`;
+    }
+    if (daysAgo > 0) {
+      return `${daysAgo} days ago`;
+    }
+  }
 }

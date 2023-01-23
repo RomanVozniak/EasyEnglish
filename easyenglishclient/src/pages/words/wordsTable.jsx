@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Table, Button, Form, Row, Col } from "react-bootstrap";
+import React, { useState } from "react";
+import { Table, Button, Form } from "react-bootstrap";
 
 import { useWordsStore } from "./../../stores/wordsStore";
 import { wordsApi } from "./../../functions/api";
@@ -20,7 +20,7 @@ export default function CardsTable(props) {
     };
     const deleteClick = () => {
       wordsApi.deleteWord(word.id);
-      window.location.reload();
+      actions.setRefreshPage();
     };
 
     return (
@@ -62,7 +62,7 @@ export default function CardsTable(props) {
         </thead>
         <tbody>
           {words.map((word) => {
-            const card = cards.find((card) => card.id == word.cardId);
+            const card = cards.find((card) => card.id === word.cardId);
             const cardName = card ? card.name : "";
 
             return (

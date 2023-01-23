@@ -19,12 +19,9 @@ namespace EasyEnglishApi.Services
 
         public async Task<IEnumerable<CardDto>> GetCardsAsync()
         {
-
             IEnumerable<Card> cards = await _unitOfWork.CardRepository.GetCardsAsync();
 
             List<CardDto> cardsDto = new List<CardDto>();
-
-            
 
             foreach (Card card in cards)
             {

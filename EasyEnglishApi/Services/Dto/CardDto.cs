@@ -13,6 +13,8 @@ namespace EasyEnglishApi.Services.Dto
 
         public DateTime CreatedAt { get; set; }
 
+        public DateTime LastLearnDate { get; set; }
+
 
         // relations
         public List<Word>? Words { get; set; } = new List<Word>();

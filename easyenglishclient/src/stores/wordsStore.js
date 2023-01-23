@@ -10,6 +10,7 @@ const initialState = {
   cards: [],
   cardId: null,
   compactView: false,
+  refreshPage: 0,
 };
 
 // All the actions that mutate the store
@@ -45,6 +46,12 @@ const actions = {
     (value) =>
     ({ setState }) => {
       setState({ cardId: value });
+    },
+
+  setRefreshPage:
+    () =>
+    ({ setState, getState }) => {
+      setState({ refreshPage: getState().refreshPage + 1 });
     },
 };
 
