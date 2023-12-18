@@ -4,7 +4,7 @@ const context = ["/api"];
 
 module.exports = function (app) {
   const appProxy = createProxyMiddleware(context, {
-    target: "http://localhost:8081",
+      target: "http://localhost:5292",
     secure: false,
   });
 
